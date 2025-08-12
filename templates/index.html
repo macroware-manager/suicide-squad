@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>literal piece of shit</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1a1919;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .name-card {
+      background: #252424;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      margin-top: 40px;
+      max-width: 400px;
+      width: 90%;
+    }
+    .name-card h1 {
+      color: aliceblue;
+      margin: 0;
+      font-size: 2rem;
+    }
+    .name-card p {
+      color: #666;
+      margin: 8px 0 0;
+    }
+
+    h2 {
+        color: aliceblue;
+    }
+
+    .name-card p1 {
+        color: #c1c1c1;
+    }
+
+    .photo-dump {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+      width: 90%;
+      max-width: 900px;
+      margin: 20px 0 40px;
+    }
+
+    .photo-dump img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* makes it a square */
+    border-radius: 8px;
+    object-fit: cover; /* crops image to fit square without distortion */
+    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    }
+
+
+    .photo-dump img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #333;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 6px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        z-index: 9999;
+        }
+        .notification.show {
+        opacity: 1;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Name Card -->
+  <div class="name-card">
+    <h1>~ werinq ~</h1>
+    <p1>i just wanted to be loved and not ignored my whole life. i will post this website on my profile once im about to slit my wrists because i dont want to live anymore, living just feels like a chore at this point, thanks to people who cared about me and showed me basic human decency</p1>
+    <p>i didnt want it to end like this</p>
+  </div>
+
+  <h2>Photo Dump (photos i really liked)</h2>
+
+  <!-- Photo Dump Grid -->
+  <div class="photo-dump">
+    {% for image in images %}
+      <img src="{{ url_for('static', filename=image) }}" alt="useless piece of shit">
+    {% endfor %}
+  </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+  
+    <script>
+            function showNotification(message) {
+    const notification = document.getElementById('notification');
+    notification.textContent = message;
+    notification.classList.add('show');
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 2000);
+    }
+
+document.querySelectorAll('img').forEach(img => {
+  img.addEventListener('click', () => {
+    const filename = img.src.split('/').pop();
+    const cleanName = decodeURIComponent(filename).replace(/\.[^/.]+$/, ""); 
+    showNotification(cleanName);
+  });
+});
+
+
+    </script>
+
+</body>
+</html>
