@@ -3,7 +3,7 @@ import os
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/suicide")
 def index():
     images_folder = os.path.join(app.static_folder, "images")
     image_files = [
