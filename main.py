@@ -14,4 +14,4 @@ def index():
     return render_template("index.html", images=image_files)
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=False, port=4000)
